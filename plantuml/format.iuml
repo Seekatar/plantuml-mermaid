@@ -1,0 +1,103 @@
+@startuml
+
+' skinparam BackgroundColor #lightgray
+skinparam Padding 3
+
+!$borderColor = "#c8c8c8"
+!$fontColor = "#c8c8c8"
+!$loyalBlue = "#003352"
+!$loyalRed = "#d10373"
+
+!$apigeeColor = '#FB4B02'
+!$oktaColor = '#0D68B4'
+!$mongoColor = '#4EA83F'
+!$dreColor = '#OrangeRed'
+!$cfColor = '#DarkGreen'
+!$islColor = '#DarkGoldenRod'
+!$awsColor = '#F37C23'
+
+!$ConfigurableColorPlain = 'Tomato'
+!$ISGColor = '#003394'
+!$ConfigurableColor = '#'+$ConfigurableColorPlain
+
+skinparam TitleFontColor SteelBlue
+
+skinparam BoxPadding 10
+
+skinparam sequence {
+  ParticipantBackgroundColor $loyalBlue
+  ParticipantBorderColor $borderColor
+  ParticipantFontColor $fontColor
+  ParticipantBorderThickness 1
+
+  EntityBorderColor $borderColor
+  EntityBackgroundColor $red
+
+  GroupBodyBackgroundColor transparent
+  GroupBorderColor slategray
+
+  BoxBorderColor darkgray
+
+  ArrowFontColor #4365a4
+  ArrowColor #4365a4
+
+  LifeLineBorderColor #4365a4
+}
+
+skinparam component {
+  BackgroundColor steelblue
+  BorderColor darkslateblue
+  FontColor $fontColor
+  BorderThickness 1
+
+  GroupBodyBackgroundColor transparent
+  GroupBorderColor slategray
+
+  BoxBorderColor darkgray
+
+  ArrowFontColor #4365a4
+  ArrowColor #4365a4
+
+  LifeLineBorderColor #4365a4
+}
+
+skinparam note {
+  BorderColor #c8c8c8
+  FontColor #505050
+}
+
+skinparam database {
+  BorderColor SteelBlue
+  FontColor #505050
+  BackgroundColor #9cb1fa
+}
+
+skinparam state {
+  AttributeFontColor $fontColor
+  FontColor $fontColor
+  BackgroundColor SteelBlue
+  BorderColor CornflowerBlue
+  StartColor SteelBlue
+  EndColor SteelBlue
+  ' doesn't seem to work
+  StateBackgroundColor<<choice>> red
+  StateBorderColor<<choice>> blue
+}
+
+
+skinparam actor {
+  BorderColor DarkGray
+  BackgroupColor $loyalBlue
+}
+
+skinparam control {
+  BorderColor DarkGray
+  BackgroupColor $loyalBlue
+}
+
+skinparam entity {
+  BorderColor DimGray
+  BackgroupColor $loyalBlue
+}
+
+@enduml
