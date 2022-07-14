@@ -1,0 +1,18 @@
+@startuml APP-C4
+
+!procedure inbound()
+System_Ext(Items, "Item", "Sources of item data")
+
+Person(ISLUser, Categorization , "Mainly offshore team" )
+Person(DCUser, Data Entry , "Mainly offshore team" )
+Person_Ext(AdjUser, User , "company user" )
+!endprocedure
+
+!procedure outbound()
+System(RecEngines, "Recommendation Engines", "")
+System(Other,"Other internal Systems","")
+System_Ext(ISG,"Professional\nServices Vendor","")
+System_Ext(EORClient, "Client", "Outbound data processing.")
+!endprocedure
+
+@enduml

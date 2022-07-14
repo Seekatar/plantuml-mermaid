@@ -1,0 +1,33 @@
+@startuml ChangeResolution
+!include  <C4/C4_Context.puml>
+!include ../format.iuml
+
+
+title Image Shrinking
+
+System_Ext(Scanner, "Scanner")
+System_Ext(Converter, "Converter.exe", "Process to convert TIFF")
+database Drop
+database Converted
+
+System_Boundary(Kubernetes , "Kubernetes ") {
+    System(FileWatcher, "FileWatcher", "Validate XML")
+    System(ConverterWatcher, "ConvertWatcher")
+    System(BatchProcessor, "BatchProcessor")
+    System(AndSoOn, "...")
+}
+
+
+
+
+Scanner -right-> Drop
+Drop -up-> FileWatcher : New File
+FileWatcher -> BatchProcessor
+Drop -> Converter
+ConverterWatcher -down-> Converter : New File NAS Path
+Converter -> Converted
+Converted -> ConverterWatcher : Converted NAS Path
+BatchProcessor -> ConverterWatcher
+ConverterWatcher -> AndSoOn
+
+@enduml

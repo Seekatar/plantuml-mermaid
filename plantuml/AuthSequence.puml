@@ -1,0 +1,46 @@
+@startuml AuthSequence
+
+!include ../format.iuml
+!define SPRITESURL https://raw.githubusercontent.com/rabelenda/cicon-plantuml-sprites/v1.0/sprites
+!includeurl SPRITESURL/mongodb.puml
+
+!$showErr = 0
+!$showEvaluator = 1
+
+!procedure errMsg($msg)
+!if ($showErr == 1)
+note right : $msg
+!endprocedure
+
+
+title Auth Sequence
+
+' hide footbox
+
+participant UI
+participant API
+participant Okta
+participant Gateway as GW
+
+UI -> API : Get Bill
+group Loop 1 time if 401 from Gateway
+
+    group No JWT, or Expired
+        API -> Okta: Get JWT\nclient_id,client_secret
+        Okta -> API: JWT
+    end
+
+    API -> GW : GetBill\nJWT
+
+    alt 200 - JWT Ok
+        GW -> API: Bill
+    else 401 - JWT Expired (or invalid) first time
+        Okta -> API: Loop back up\nonly once\nto renew JWT
+    else 401 - second time
+        API -> API: Error out
+    end
+end
+note across: This will be similar for any Gateway call
+
+
+@enduml

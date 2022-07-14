@@ -1,0 +1,64 @@
+@startuml APP_Container
+' !include  <C4/C4_Container.puml>
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!include C4.iuml
+LAYOUT_WITH_LEGEND()
+
+title Container diagram for APP
+
+System_Boundary(APP, "APP") {
+    Container(DCApp,"DC App","Vue, .NET","Manages workload\nCaptures data")
+    Container(FPApp,"User App","Vue, .NET","Manages workload\nCaptures data")
+    Container(Image,"Image Service",".NET","Ingests Items")
+    Container(ISLApp,"Categorization App","Vue UI, .NET","Manages workload\nCaptures data")
+    Container(ItemSvc,"Item & Things",".NET","Validates and saves items, things, images")
+    Container(RecSvc,"Recommendation",".NET","Gets, validates, saves recommendations")
+    Container(EOR,"Reporting",".NET","Generates EOR, reporting")
+    Container(ReviewSvc,"Professional Services",".NET","Manages Reviews")
+
+    ' cross cutting
+    Container(ALog,"Activity Log",".NET X-Cutting","Save activity of actions throughout the system")
+    Container(WF,"Workflow",".NET X-Cutting","Manage item state")
+    Container(WH,"Webhook",".NET X-Cutting","Call external systems")
+    Container(GW,"Service Gateway",".NET X-Cutting","External system gateway to APP")
+
+    Rel(ItemSvc,RecSvc,"Sends items to")
+    Rel(FPApp,ItemSvc,"Saves thing to")
+    Rel(FPApp,RecSvc,"Saves recommendations to")
+    Rel(ISLApp,ItemSvc,"Links items to thing, provider, patient")
+    Rel(DCApp,ItemSvc,"Saves items to")
+    Rel_R(Image,ISLApp, "Sends images to")
+    Rel_R(RecSvc,EOR,"Sends EOR data to")
+    Rel(FPApp,ReviewSvc,"Triggers review")
+    Rel(ReviewSvc,RecSvc,"Save recommendations to")
+    Rel_R(ISLApp,DCApp,"Sends images to")
+}
+
+$inbound()
+
+Rel(Items,ItemSvc,"Saves items, things, data to")
+Rel(Items,Image,"Saves images to")
+Rel(AdjUser,FPApp,"Edits things, recommendations")
+Rel(DCUser,DCApp,"Keys item data from images")
+Rel(ISLUser,ISLApp,"Categorizes images, links item to provider, patient, thing")
+
+' Lay_L(RecSvc,ALog)
+' Lay_L(WF,RecSvc)
+' Lay_L(WF,WH)
+' Lay_L(WF,WH)
+Lay_U(WH,ALog)
+Lay_L(RecSvc,GW)
+Lay_L(GW,WH)
+Lay_R(ALog,WF)
+
+$outbound()
+
+BiRel(RecSvc,RecEngines,"Retrieves recommendations from")
+Rel(EOR,EORClient,"Sends EOR, reports to")
+Rel(ReviewSvc,ISG,"Sends reviews to")
+Rel(ISG, ReviewSvc,"Sends recommendations to")
+BiRel(WH,Other,"Notifies of events/Pulls data.")
+Rel(Other,GW,"Pulls data from")
+
+@enduml

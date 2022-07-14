@@ -1,0 +1,21 @@
+@startuml
+
+title My Sequence
+
+' participant "Conditional Form" as cf
+
+actor Broswer as b
+
+b -> hra
+hra -> cf : Start Form
+cf -> cf : Do work
+alt
+cf --> hra : Reply
+else
+cf --> hra : Error
+end alt
+
+
+
+
+@enduml

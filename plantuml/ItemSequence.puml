@@ -1,0 +1,53 @@
+@startuml item
+
+!include ../format.iuml
+!define SPRITESURL https://raw.githubusercontent.com/rabelenda/cicon-plantuml-sprites/v1.0/sprites
+!includeurl SPRITESURL/mongodb.puml
+
+title Bill Item
+' hide footbox
+
+box Rackspace
+participant "ServceA\n&\nServceB" as MF $ServceAColor
+database "ServceA" as DB
+database "ServceB Db" as ServceBDB
+database "NAS" as NAS #DarkSlateGray
+end box
+
+box APP
+participant "UI\n(APP, DC)" as UI
+participant "Service\nGateway" as GW
+participant "Item\nSvc" as BI
+participant "SQL Proxy" as SQL
+end box
+
+== Save Item ==
+note over MF
+In future
+this would be saved
+to AWS
+end note
+MF -> NAS : Save Item
+MF -> DB : Save Item Path
+alt ServceB only
+MF -> ServceBDB : Save meta data
+end alt
+
+== Retrieve Item ==
+UI -> GW : Get Item
+GW -->> BI : Get Item
+note over BI
+In future
+this service would
+retrieve from AWS
+end note
+BI -> SQL : Get Item Path
+SQL <-> DB : Query MF DB
+SQL -> BI : Path
+BI -> NAS : Read Item
+BI -> BI : Encode
+BI --> GW : Encoded Item
+GW -> UI : Encoded Item
+
+
+@enduml

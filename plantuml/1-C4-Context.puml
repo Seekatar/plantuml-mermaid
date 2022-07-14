@@ -1,0 +1,34 @@
+@startuml APP_Context
+!include  <C4/C4_Context.puml>
+' latest
+' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+!include C4.iuml
+
+LAYOUT_WITH_LEGEND()
+
+header
+September 22, 2021
+end header
+
+title Context diagram for MyApp
+
+$inbound()
+
+System(APP,"APP","Data Ingest,\nItem Processing,\nRecommendation Orchestration,\nReporting,\nData export")
+
+Rel(Items,APP,"Sends items, forms, images")
+Rel(AdjUser,APP,"Edits forms, recommendations")
+Rel(DCUser,APP,"Keys item data from images")
+Rel(ISLUser,APP,"Categorized images, links item to provider, patient, form")
+
+$outbound()
+
+BiRel(APP,RecEngines,"Retrieves recommendations from")
+Rel(APP,EORClient,"Send EOR, reports to")
+Rel(APP,ISG,"Sends reviews to")
+Rel(ISG, APP,"Sends recommendations to")
+BiRel(APP,Other,"Notifies of events/Pulls data.")
+
+
+@enduml

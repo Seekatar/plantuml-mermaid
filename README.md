@@ -1,14 +1,14 @@
 # PlantUML and Mermaid Diagrams
 
-Diagrams as code can save you alot of time when creating diagram for communication. You can spend your time thinking about the problem, instead of why the lines of the sequence diagram are crooked.
+Diagrams as code can save you alot of time when creating diagram for communication. You can spend your time thinking about the problem, instead of trying to get the lines of the sequence diagram are crooked, or the boxes lined up just right.
 
-When I first saw someone create a sequence diagram in five minutes with PlantUML after I'd been spending hours fighting VISIO, I was sold. Most diagrams you create are made to help you and your colleagues understand the the problem or implementation the solution. They need to be clear, but do they need to be ready for an art gallery? I think not.
+When I first saw someone create a sequence diagram in five minutes with PlantUML after I'd been spending hours fighting VISIO, I was sold. Most diagrams you create are made to help you and your colleagues understand the the problem or a solution. They need to be clear, but do they need to be ready for an art gallery? I think not.
 
 After using PlantUML for a while, I stumbled upon Mermaid diagrams, which are very similar.
 
 ## PlantUML
 
-[PlantUML](https://plantuml.com/) has been around since 2009 and is written it Java. It uses its own DSL to describe various diagrams. Even though the name has UML in it, it can do more than just UML diagrams.
+[PlantUML](https://plantuml.com/) has been around since 2009 and is written in Java. It uses its own DSL to describe various diagrams. Even though the name has UML in it, it can do more than just UML diagrams.
 
 This is the first one I used and am most familiar with. It seems easier to learn and use, but has the downside not being supported in repo sites like GitHub, and Azure DevOps Wikis.
 
@@ -86,6 +86,7 @@ Both have very good documentation with many examples of each diagram type its su
 - [PlantUML Online Server](https://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000)
 - [PlantUML Themes](https://the-lum.github.io/puml-themes-gallery/)
 - [PlantUML on GitHub](https://github.com/plantuml/plantuml)
+- [PlantUML and C4](https://github.com/plantuml-stdlib/C4-PlantUML)
 - [Mermaid](https://mermaid-js.github.io/mermaid/#/)
 - [Mermaid Live](https://mermaid.live/edit#pako:eNpVkM-KwkAMxl8l5OSCfYEeBG3Vi6Cgt46H0InOIPOHdMoibd99p5aF3ZyS7_t9IWTANmjGEp9C0cCtVh5ybZvKiO2So-4ORbEZj5zABc_vEXarY4DOhBitf34t_G6GoBpOM8aQjPWvabGqT_7seYS6OVFMId7_OrfvMMK-sReT1_93jHBOHZoHlQ8qWhKoSD4IrtGxOLI6nz7MisJk2LHCMrea5KVQ-SlzfdSUeK9tCoJlkp7XSH0K17dvf-eFqS3lL7hFnH4ABg5bBA)
 - [Mermaid Themes](https://mermaid-js.github.io/mermaid/#/directives?id=directive-examples)
